@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1 dir="rtl">{{ quiz_title }}</h1>
+    <p class="note" dir="rtl">هذا الاختبار لا يحفظ إجاباتك. ويتغير ترتيب الاختيارات في كل مرة تفتح فيها الاختبار.</p>
+    <form method="POST" action="{{ url_for('quiz') }}">
+        {% for question in questions %}
+            <fieldset dir="rtl">
+                <legend>{{ loop.index }}. {{ question['question_text'] }}</legend>
+                {# نستخدم index الخاص بالسؤال لتجنب أي مشاكل في أسماء الحقول #}
+                {% set q_index = loop.index0 %}
+                {% for option in question['options'] %}
+                    <label>
+                        <input type="radio" name="q_{{ q_index }}" value="{{ option }}" required>
+                        {{ option }}
+                    </label>
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+        <button type="submit">إرسال الإجابات</button>
+    </form>
+{% endblock %}

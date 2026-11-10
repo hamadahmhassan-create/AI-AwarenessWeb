@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="result-container">
+    <h1 dir="auto">نتيجة الاختبار التوعوي</h1>
+    <p dir="auto">لقد حصلت على: <strong>{{ score }}</strong> من <strong>{{ total_questions }}</strong></p>
+    <p dir="auto" class="note">هذا الموقع لا يحفظ إجاباتك.</p>
+
+    <div class="review">
+        <h3 dir="auto">مراجعة الإجابات:</h3>
+        {% for res in detailed_results %}
+            <div class="review-item {{ 'correct' if res.is_correct else 'wrong' }}">
+                <p dir="auto"><strong>السؤال {{ loop.index }}:</strong> {{ res.question_text }}</p>
+                <p dir="auto" class="user-answer">
+                    <strong>إجابتك:</strong> {{ res.user_answer if res.user_answer else 'لم تقم بالإجابة' }}
+                </p>
+
+                {% if not res.is_correct %}
+                    <p dir="auto" class="correct-answer">
+                        <strong>الإجابة الصحيحة:</strong> {{ res.correct_answer }}
+                    </p>
+                {% else %}
+                    <p dir="auto" class="well-done">إجابة صحيحة، أحسنت!</p>
+                {% endif %}
+
+                {# سبب التوعية يظهر للإجابات الصحيحة والخاطئة معًا #}
+                <div dir="auto" class="reason">
+                    <strong>💡 سبب التوعية:</strong> {{ res.reason }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="sources">
+        <h3 dir="auto">المصادر:</h3>
+        <ul>
+            <li><a href="https://www.ibm.com/think/topics/ai-hallucinations" target="_blank" rel="noopener noreferrer">IBM — What are AI hallucinations?</a></li>
+            <li><a href="https://unesdoc.unesco.org/ark:/48223/pf0000386693" target="_blank" rel="noopener noreferrer">UNESCO — Guidance for generative AI in education and research (2023)</a></li>
+            <li><a href="https://mediasmarts.ca/teacher-resources/spotting-deepfakes" target="_blank" rel="noopener noreferrer">MediaSmarts — Spotting Deepfakes</a></li>
+            <li><a href="https://fullfact.org/toolkit/how-to-spot-deepfakes/" target="_blank" rel="noopener noreferrer">Full Fact — How to spot deepfake videos and AI audio</a></li>
+            <li><a href="https://doi.org/10.6028/NIST.SP.1270" target="_blank" rel="noopener noreferrer">NIST — Towards a Standard for Identifying and Managing Bias in AI (SP 1270)</a></li>
+        </ul>
+    </div>
+
+    <div class="actions">
+        <a class="btn btn-primary" href="{{ url_for('home') }}">إعادة الاختبار</a>
+        <a class="btn btn-success" href="https://eu.surveymars.com/q/ih32UZYOi" target="_blank" rel="noopener noreferrer">قدّم رأيك (يرجى ترك تقييم بعد الانتهاء)</a>
+    </div>
+</div>
+{% endblock %}
