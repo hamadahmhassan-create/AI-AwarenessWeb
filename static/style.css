@@ -66,10 +66,18 @@ button[type="submit"]:hover {
 
 .result-container h1 {
     color: #007bff;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .result-container p {
     font-size: 20px;
+    border: 2px solid #695af4;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin: 10px 0;
 }
 
 .result-container a {
@@ -79,6 +87,7 @@ button[type="submit"]:hover {
     padding: 10px 20px;
     border-radius: 8px;
     text-decoration: none;
+    border: 2px solid #0056b3;
 }
 
 /* Arabic and right-to-left layout */
